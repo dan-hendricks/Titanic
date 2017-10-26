@@ -1,0 +1,2 @@
+As a rule its better to try the simplest learners first, (eg, naive Bayes before logistic regression, k-nearest neighboor before support vector machines.)
+

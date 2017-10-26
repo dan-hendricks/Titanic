@@ -1,0 +1,2 @@
+Random Forrest is usually best when max features = sqrt(total num features)
+
