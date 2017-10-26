@@ -30,10 +30,11 @@ class prepareData(object):
         self.cleanAge()
         self.cleanSex()
         self.cleanEmbarked()
-        self.defineFeatures()
         self.cleanFare()
+
         if classType == 'train':
             self.defineTarget()
+        self.defineFeatures()
         
     def cleanAge(self):
         self.data.Age = self.data.Age.fillna(self.data.Age.median())
@@ -58,21 +59,34 @@ class prepareData(object):
         self.target = self.data.Survived.values
 
     def defineFeatures(self):
-        self.featureList = ['Pclass','Sex','Age','Fare','Child']
-#        self.featureList = ['Pclass','Sex','Fare','Child']
+        self.featureList = ['Pclass','Sex','Age','Fare','Child','SibSp']
+#        self.featureList = ['Pclass','Sex']
         self.features = self.data[self.featureList].values
         print('feature list is '+str(self.featureList))
 
-#train = prepareData(train_data,classType = 'train')
-#test = prepareData(test_data)
-#
-#tree_one = tree.DecisionTreeClassifier(max_depth = 5,min_samples_leaf = 4)
-#tree_one = tree_one.fit(train.features,train.target)
-#
-#print(tree_one.feature_importances_)
-#print(' ')
-#print(tree_one.score(train.features,train.target))
+train = prepareData(train_data,classType = 'train')
+test = prepareData(test_data)
 
-##
-#test_prediction = tree_one.predict(test.features)
+tree_one = tree.DecisionTreeClassifier(max_depth = 5,min_samples_leaf = 4)
+tree_one = tree_one.fit(train.features,train.target)
+
+print(tree_one.feature_importances_)
+print(' ')
+print(tree_one.score(train.features,train.target))
+
 #
+test_prediction = tree_one.predict(test.features)
+
+
+# Create a data frame with two columns: PassengerId & Survived. Survived contains your predictions
+PassengerId =sp.array(test.data["PassengerId"]).astype(int)
+my_solution = pd.DataFrame(test_prediction, PassengerId, columns = ["Survived"])
+#print(my_solution)
+
+# Check that your data frame has 418 entries
+print(my_solution.shape)
+
+# Write your solution to a csv file with the name my_solution.csv
+my_solution.to_csv("my_solution_two.csv", index_label = ["PassengerId"])
+
+
