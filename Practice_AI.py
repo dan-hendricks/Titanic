@@ -17,51 +17,62 @@ test_url="http://s3.amazonaws.com/assets.datacamp.com/course/Kaggle/test.csv"
 test_data = pd.read_csv(test_url)
 train_data = pd.read_csv(train_url)
 
-train_data.Age = train_data.Age.fillna(train_data.Age.median())
+col_names = ['PassengerId', 'Pclass', 'Name', 'Sex', 'Age', 'SibSp', 'Parch',
+'Ticket', 'Fare', 'Cabin', 'Embarked']
 
 
-train_data['Child'] = float('NaN')  # For definitions, need to use brackets. ALl else, can use .
-train_data.Child[train_data.Age >= 18] = 0
-train_data.Child[train_data.Age < 18] = 1
+class prepareData(object):
+    """ Class so that anything I do to test, can be done to train easily"""
 
-train_data.Sex[train_data.Sex=='male'] = 0
-train_data.Sex[train_data.Sex=='female'] = 1
+    def __init__(self,data,classType='test'):
+        self.data = data
+        
+        self.cleanAge()
+        self.cleanSex()
+        self.cleanEmbarked()
+        self.defineFeatures()
+        self.cleanFare()
+        if classType == 'train':
+            self.defineTarget()
+        
+    def cleanAge(self):
+        self.data.Age = self.data.Age.fillna(self.data.Age.median())
+        self.data['Child'] = float('NaN') # initalize with NaNs
+        self.data.Child[self.data.Age >= 18] =0
+        self.data.Child[self.data.Age < 18] = 1
 
-train_data.Embarked = train_data.Embarked.fillna('S')
-train_data.Embarked[train_data.Embarked == 'S'] = 0
-train_data.Embarked[train_data.Embarked == 'C'] = 1
-train_data.Embarked[train_data.Embarked == 'Q'] = 2
+    def cleanSex(self):
+        self.data.Sex[self.data.Sex == 'male'] = 0
+        self.data.Sex[self.data.Sex == 'female'] = 1
+        
+    def cleanEmbarked(self):
+        self.data.Embarked = self.data.Embarked.fillna('S')
+        self.data.Embarked[self.data.Embarked == 'S'] = 0 ## Why is this neecesary? Why not keep as str?
+        self.data.Embarked[self.data.Embarked == 'C'] = 1
+        self.data.Embarked[self.data.Embarked == 'Q'] = 2
 
-target = train_data.Survived.values
+    def cleanFare(self):
+        self.data.Fare = self.data.Fare.fillna(self.data.Fare.median())
+        
+    def defineTarget(self):
+        self.target = self.data.Survived.values
 
-#features = train_data[['Pclass','Sex','Age','Fare']].values
-features = train_data[['Pclass','Sex','Age','Fare','Child']].values
+    def defineFeatures(self):
+        self.featureList = ['Pclass','Sex','Age','Fare','Child']
+#        self.featureList = ['Pclass','Sex','Fare','Child']
+        self.features = self.data[self.featureList].values
+        print('feature list is '+str(self.featureList))
 
-tree_one = tree.DecisionTreeClassifier()
-tree_one = tree_one.fit(features,target)
-
-
-#%%
+#train = prepareData(train_data,classType = 'train')
+#test = prepareData(test_data)
 #
-##print('pclass, sex, age, fare')
-print(tree_one.feature_importances_)
-print(' ')
-print(tree_one.score(features,target))
+#tree_one = tree.DecisionTreeClassifier(max_depth = 5,min_samples_leaf = 4)
+#tree_one = tree_one.fit(train.features,train.target)
 #
-test_data.Fare = test_data.Fare.fillna(test_data.Fare.median())
-#
-test_data.Sex[test_data.Sex == 'male' ] = 0
-test_data.Sex[test_data.Sex == 'female'] = 1
-test_data.Age = test_data.Age.fillna(test_data.Age.median())
-test_data['Child'] = float('NaN')
-test_data.Child[test_data.Age < 18] = 1
-test_data.Child[test_data.Age >= 18] = 0
+#print(tree_one.feature_importances_)
+#print(' ')
+#print(tree_one.score(train.features,train.target))
 
+##
+#test_prediction = tree_one.predict(test.features)
 #
-#
-#
-#test_feature = test_data[['Pclass','Sex','Age','Fare']].values
-#test_features = test_data[['Pclass','Sex','Age','Fare']].values
-#
-#test_prediction = tree_one.predict(test_features)
-
