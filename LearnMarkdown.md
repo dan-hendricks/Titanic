@@ -1,13 +1,19 @@
-# Table of Lab Safety Training History
-| Name | BioHazard (Room 264) Training Date: | Chemical (Room 254) Training Date:  | 
+# Table of Bio Lab (Room 264) Safety Training History
+| Name | Training Date: | Training Version | 
 |------              |-----------|-------------|
-| Gayun Kim          | 10/27/2017 |------ |
-| Dan Hendricks      | 11/01/2017 |------ |
-| Monica Cervantes   | 10/27/2017 |------ |
-| Min Kim            | 10/27/2017 |------ |
-| Travis Niederhauser| 10/27/2017|------ |
-|Andrew Nguyen       |10/27/2017 |------ |
-|Alec Raymond        | 11/01/2017|------ |
+| Gayun Kim          | 10/27/2017 | https://prezi.com/p/2-5pwizq59yg/ |
+| Dan Hendricks      | 11/01/2017 | https://prezi.com/p/2-5pwizq59yg/ |
+| Monica Cervantes   | 10/27/2017 | https://prezi.com/p/2-5pwizq59yg/  |
+| Min Kim            | 10/27/2017 | https://prezi.com/p/2-5pwizq59yg/  |
+| Travis Niederhauser| 10/27/2017| https://prezi.com/p/2-5pwizq59yg/  |
+|Andrew Nguyen       |10/27/2017 | https://prezi.com/p/2-5pwizq59yg/  |
+|Alec Raymond        | 11/01/2017| https://prezi.com/p/2-5pwizq59yg/  |
+
+# Table of Chemical Lab (Room 254) Safety Training History
+| Name |Training Date: | Training Version | 
+|------              |-----------|-------------|
+| Gayun Kim          | ------- |------ |
+
 
 
 # List of those with emergency access to all Labs
