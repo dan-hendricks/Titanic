@@ -1,12 +1,23 @@
-# Table of Specifications for On-Line Medic Labs
+# Table of Lab Safety Training History
+| Name | BioHazard (Room 264) Training Date: | Chemical (Room 254) Training Date:  | 
+|------              |-----------|-------------|
+| Gayun Kim          | 10/27/2017 |------ |
+| Dan Hendricks      | 11/01/2017 |------ |
+| Monica Cervantes   | 10/27/2017 |------ |
+| Min Kim            | 10/27/2017 |------ |
+| Travis Niederhauser| 10/27/2017|------ |
+|Andrew Nguyen       |10/27/2017 |------ |
+|Alec Raymond        | 11/01/2017|------ |
 
-| Name | Client ID | Hardware ID | Spectrometer ID | Light ID | Slot Width (mm) | LAN Address   | Location     |
-|------|-----------|-------------|-----------------|----------|-----------------|---------------|--------------|
-| TARA | CX-25B916 |      12     |    116130478    | 1605032  |     1.5         | 192.168.0.100 | Medic RM 266 |
-| CHLOE| CX-2D17D8 |      11     |    116130491    | 1509049  |     1.0         | 192.168.0.101 | Medic RM 267 |
-| JILL | CX-2E1282 |      3      |    116130515    | 1502019  |     1.5         | 192.168.0.102 | Medic RM 268 |
-|TERESA| CX-2E129C |      10     |        4        |    4     |     10          | 192.168.0.103 | Medic RM 269 |
-|  T1  | CX-xxxxxx |      0      |        5        |    5     |     10          | 192.168.0.104 | Teststand 1  |
-|  T2  | CX-xxxxxx |      0      |        6        |    6     |     10          | 192.168.0.105 | Teststand 3  |
-|  T3  | CX-xxxxxx |      0      |        7        |    7     |     10          | 192.168.0.106 | Teststand 3  |
-|  T4  | CX-xxxxxx |      0      |        8        |    8     |     10          | 192.168.0.107 | Teststand 4  |
+
+# List of those with emergency access to all Labs
+|Name | Reason for access| Date Access Given|
+|-----|------|-------|
+|Ben Swenson | Medic Business Lead | 11/02/2017|
+|Jeff Campbell| Medic Team Lead | 11/02/2017 |
+|Josh Larsen | Medic Team Lead | 11/02/2017 |
+|Dan Hendricks| Medic Team Lead | 11/02/2017 |
+|Gayun Kim | Labratory Manager | 11/02/2017 |
+|Task Force | Custodial | 11/02/2017 |
+|Upper Management | Upper Management | 11/02/2017 |
+
