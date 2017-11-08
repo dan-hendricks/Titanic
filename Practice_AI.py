@@ -32,7 +32,8 @@ class prepareData(object):
         self.cleanSex()
         self.cleanEmbarked()
         self.cleanFare()
-
+        self.cleanTitles()
+        
         if classType == 'train':
             self.defineTarget()
         self.defineFeatures()
@@ -55,13 +56,31 @@ class prepareData(object):
 
     def cleanFare(self):
         self.data.Fare = self.data.Fare.fillna(self.data.Fare.median())
-        
+#        self.data.Fare[self.data.Fare <= 7.91] = 0
+#        self.data.Fare[self.data.Fare > 7.91 and self.data.Fare <= 14.45] = 1
+#        self.data.Fare[self.data.Fare > 14.45 and self.data.Fare <= 31] = 2
+#        self.data.Fare[self.data.Fare > 31] = 3
+
+    def cleanTitles(self):
+        names =self.data['Name']
+        nameKey = {'Mr.':0, 'Master.':1, 'Miss.':3, 'Mrs.':4, 'the':5,
+                   'Dr.':6, 'Rev.':7, 'Major.':8, 'Col.':8, 'Mlle.':2, 'Mme.':4, 
+                   'Don.':9, 'Lady.':10, 'Countess.':10, 'Jonkheer.':10, 'Sir.':9,
+                   'Capt.':8, 'Ms.':3, 'Dona.':10}
+        titles = names.apply(lambda x: x.split(',')[1].split(' ')[1])
+        for k,v in  nameKey.items():
+            titles[titles == k] = v
+        self.data['Titles'] = titles
+
     def defineTarget(self):
         self.target = self.data.Survived.values
 
     def defineFeatures(self):
-#        self.featureList = ['Pclass','Sex','Age','Fare','Child','SibSp','Parch']
-        self.featureList = ['Pclass','Sex','Age','Fare','Child','SibSp']
+        # Add cabin and names....
+        # Child doesn't seem to help much....
+        #self.featureList = ['Pclass','Sex','Age','Fare','Child','SibSp','Parch']
+        #self.featureList = ['Pclass','Sex','Age','Fare','Child','SibSp']
+        self.featureList = ['Pclass','Sex','Age','Fare','SibSp','Embarked','Titles']
 
         self.features = self.data[self.featureList].values
         if self.classType == 'train':
@@ -71,14 +90,14 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier as RFC
 
 #training,validating = train_test_split(train_data,test_size = .3,random_state = 3)
-
 #train = prepareData(training,classType = 'train')
 #validate = prepareData(validating,classType='train')
 
-
 train = prepareData(train_data,classType = 'train')
+
 tree_one = tree.DecisionTreeClassifier(max_depth = 7,min_samples_leaf = 4)
-#tree_one = RFC(max_depth = 5,min_samples_leaf = 4)
+#tree_one = RFC(n_estimators = 20, max_depth = 8,min_samples_leaf = 4)
+
 tree_one = tree_one.fit(train.features,train.target)
 
 print(tree_one.feature_importances_)
@@ -99,6 +118,6 @@ my_solution.to_csv("my_solution.csv", index_label = ["PassengerId"])
 
 
 """
-Score to beat is .77, which came from Tree- Pcalss, Sex Age Fare Child SibSp, local was .83
+Score to beat is .784, 
 
 """
